@@ -78,6 +78,7 @@ document.getElementById('signup-btn').addEventListener('click', () => {
                     localStorage.setItem('accountCreated', 'true'); // Set flag in localStorage
                     localStorage.setItem('userEmail', user.email); // Store user email in local storage
                     localStorage.setItem('userName', username); // Store user name in local storage
+                    localStorage.setItem('userUID', user.uid);
                     window.location.href = 'index.html'; // Redirect to index page
                 })
                 .catch((error) => {
@@ -112,6 +113,7 @@ document.getElementById('login-btn').addEventListener('click', () => {
             getDoc(docRef).then((docSnap) => {
                 if (docSnap.exists()) {
                     const userData = docSnap.data();
+                    localStorage.setItem('userUID', user.uid);
                     localStorage.setItem('userName', userData.username); // Store user name in local storage
                     window.location.href = 'index.html'; // Redirect to index page
                 } else {

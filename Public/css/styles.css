@@ -241,17 +241,20 @@ footer a:hover {
     border-radius: 20px;
 }
 
-.active {
+.active-main {
     color: white;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     text-decoration: underline;
     text-decoration-color: white;
     text-underline-offset: 4px;
 }
-.nav-link.active:hover{
+.nav-link.active-main:hover{
     color: white;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     text-decoration: underline;
     text-decoration-color: white;
     text-underline-offset: 4px;
+}
+.hidden{
+    display: none;
 }
