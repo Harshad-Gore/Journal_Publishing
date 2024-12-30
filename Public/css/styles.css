@@ -248,13 +248,19 @@ footer a:hover {
     text-decoration-color: white;
     text-underline-offset: 4px;
 }
-.nav-link.active-main:hover{
+
+.nav-link.active-main:hover {
     color: white;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     text-decoration: underline;
     text-decoration-color: white;
     text-underline-offset: 4px;
 }
-.hidden{
+
+.hidden {
     display: none;
+}
+
+.links{
+    cursor:default;
 }
