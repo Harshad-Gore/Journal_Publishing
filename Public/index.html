@@ -81,7 +81,7 @@
                     Case (Capitalize first character of each words). It's better NOT to write in UPPER CASE.</li>
             </ul>
             <br>
-            <form action="connect.php" method="post" id="submit-the-form">
+            <form method="post" id="submit-the-form">
                 <h4 class="highlight-text">Please fill in the details of the research paper.</h4>
                 <br>
                 <div class="row mb-3">
@@ -520,11 +520,10 @@
                         style="top:2px">journal/website's policies</a>
                 </span> -->
                 <br>
-                <button id="submit-form" class="btn btn-primary">Submit</button>
+                <button id="submit-form" class="btn btn-primary" disabled>Submit</button>
             </form>
         </div>
     </section>
-
     <!-- Popular Topics Section -->
     <!-- <section id="popular-topics" class="py-5">
         <div class="container">
@@ -624,6 +623,9 @@
             </div>
         </div>
     </section>
+    <script>
+        console.log(document.getElementById('title').value);
+    </script>
 
     <!-- Footer -->
     <!-- <footer class="bg-dark text-white py-4">
@@ -651,7 +653,87 @@
             }
         });
     </script> -->
+
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const requiredFields = document.querySelectorAll('#title, #abstract, #keywords, #research-area, #file-upload, #authorName, #authorDesignation, #authorOrg, #authorEmail, #authorMobile, #country, #state, #city, #postal-code, #address');
+            const submitButton = document.getElementById('submit-form');
     
+            // Initially disable the submit button
+            submitButton.disabled = true;
+    
+            requiredFields.forEach(field => {
+                field.addEventListener('input', checkRequiredFields);
+            });
+    
+            function checkRequiredFields() {
+                let allFilled = true;
+                requiredFields.forEach(field => {
+                    if (!field.value) {
+                        allFilled = false;
+                    }
+                });
+                submitButton.disabled = !allFilled;
+            }
+        });
+    </script> -->
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('submit-form');
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const title = document.getElementById('title').value;
+                const abstract = document.getElementById('abstract').value;
+                const keywords = document.getElementById('keywords').value;
+                const researchArea = document.getElementById('research-area').value;
+                const fileUpload = document.getElementById('file-upload').files[0];
+                const messageToEditor = document.getElementById('message-to-editor').value;
+                const authorName = document.getElementById('authorName').value;
+                const authorDesignation = document.getElementById('authorDesignation').value;
+                const authorOrg = document.getElementById('authorOrg').value;
+                const authorEmail = document.getElementById('authorEmail').value;
+                const authorMobile = document.getElementById('authorMobile').value;
+                const country = document.getElementById('country').value;
+                const state = document.getElementById('state').value;
+                const city = document.getElementById('city').value;
+                const postalCode = document.getElementById('postal-code').value;
+                const address = document.getElementById('address').value;
+
+                const formData = new FormData();
+                formData.append('title', title);
+                formData.append('abstract', abstract);
+                formData.append('keywords', keywords);
+                formData.append('researchArea', researchArea);
+                formData.append('fileUpload', fileUpload);
+                formData.append('messageToEditor', messageToEditor);
+                formData.append('authorName', authorName);
+                formData.append('authorDesignation', authorDesignation);
+                formData.append('authorOrg', authorOrg);
+                formData.append('authorEmail', authorEmail);
+                formData.append('authorMobile', authorMobile);
+                formData.append('country', country);
+                formData.append('state', state);
+                formData.append('city', city);
+                formData.append('postalCode', postalCode);
+                formData.append('address', address);
+
+                const response = await fetch('', {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    showMessage('Research paper submitted successfully!', 'research_paper');
+                    form.reset();
+                } else {
+                    showMessage('Failed to submit research paper. Please try again later.', 'research_paper');
+                }
+            });
+        });
+    </script> -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (localStorage.getItem('userLoggedIn') === 'true') {
@@ -719,7 +801,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- <script src="js/bootstrap.js"></script> -->
-     <script src="js/script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

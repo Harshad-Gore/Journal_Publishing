@@ -95,12 +95,15 @@ document.getElementById('signup-btn').addEventListener('click', () => {
 });
 // log in user with email and password
 document.getElementById('login-btn').addEventListener('click', () => {
+    const loginButton = document.getElementById('login-btn');
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
-    if (email === '' || password === '') {
-        alert('Please fill out all fields');
-        return;
+    while (email === '' || password === '') {
+        alert('Please fill out all fields', 'login-message');
+        return; 
     }
+    loginButton.disabled = true;
+    loginButton.style.cursor = 'not-allowed';
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
@@ -137,6 +140,9 @@ document.getElementById('login-btn').addEventListener('click', () => {
 
 document.getElementById("submit-form").addEventListener('click', function (e) {
     e.preventDefault();
+
+    // Check if the user is logged in
+
     console.log("Form submission triggered"); // Add this line for debugging
     set(ref(jdb, 'User/' + localStorage.getItem('userName')), {
         username: localStorage.getItem('userName'),
@@ -155,14 +161,14 @@ document.getElementById("submit-form").addEventListener('click', function (e) {
         authorEmail: document.getElementById('authorEmail').value,
         authorMobile: document.getElementById('authorMobile').value
     })
-    .then(() => {
-        alert('Data submitted successfully');
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error('Error code:', errorCode);
-        console.error('Error message:', errorMessage);
-        alert('Error: ' + errorMessage);
-    });
+        .then(() => {
+            alert('Data submitted successfully');
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error('Error code:', errorCode);
+            console.error('Error message:', errorMessage);
+            alert('Error: ' + errorMessage);
+        });
 });
