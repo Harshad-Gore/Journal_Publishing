@@ -264,3 +264,10 @@ footer a:hover {
 .links{
     cursor:default;
 }
+
+#addReviewBtn,
+#submitReviewsBtn,
+#verify-user,
+#submit-submission-admin-info{
+    max-width: fit-content;
+}

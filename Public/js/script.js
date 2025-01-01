@@ -31,15 +31,15 @@ links.forEach(link => {
 document.getElementById('submit-form').addEventListener('click', function (event) {
   event.preventDefault();
 
-
   const submitButton = document.getElementById('submit-form');
-  if (localStorage.getItem('userName') === null) {
-    alert('Please login to submit the journal!');
-    window.location.href = 'login.html';
-    return;
-  }
+
   const fileInput = document.getElementById('file-upload');
   const file = fileInput.files[0];
+
+  if (!file) {
+    alert("Please upload a file!");
+    return;
+  }
 
   // Read the file and encode it in Base64
   const reader = new FileReader();
@@ -69,7 +69,6 @@ document.getElementById('submit-form').addEventListener('click', function (event
       fileBase64: fileBase64,
     };
     submitButton.disabled = true;
-    submitButton.style.cursor = 'not-allowed';
     fetch("https://script.google.com/macros/s/AKfycbxRyZtkSVK9kHxY7cJtxyMAVNhp-vldgWFaX3cTTW8LQJ82lg_klC3W_u5MHxU6KsLqFg/exec", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -80,7 +79,6 @@ document.getElementById('submit-form').addEventListener('click', function (event
         console.log("Request sent successfully");
         document.getElementById('submit-the-form').reset();
         submitButton.disabled = false;
-        submitButton.style.cursor = 'default';
         alert('Journal is submitted successfully!');
       })
       .catch((error) => console.error("Error:", error));
@@ -89,10 +87,13 @@ document.getElementById('submit-form').addEventListener('click', function (event
   reader.readAsDataURL(file); // Convert the file to Base64
 });
 
-function show() {
-  document.getElementById('journals').style.display = 'none';
-  document.getElementById('latest-publications').style.display = 'none';
-  document.getElementById('featured').style.display = 'none';
-  document.getElementById('home').style.display = 'none';
-  document.getElementById('journeldetails').classList.remove('hidden');
-}
+document.querySelectorAll('.view-more-btn').forEach(button => {
+  button.addEventListener('click', function(event) {
+      event.preventDefault();
+      const journalId = this.getAttribute('data-journal-id');
+      if (journalId === 'journal-of-computational-innovations') {
+          document.getElementById('latest-publications').classList.add('hidden');
+          document.getElementById('journeldetails').classList.remove('hidden');
+      }
+  });
+});
