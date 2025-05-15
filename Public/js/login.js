@@ -132,12 +132,9 @@ document.getElementById('login-btn').addEventListener('click', () => {
         });
 });
 
-
-
-
 document.getElementById("submit-form").addEventListener('click', function (e) {
     e.preventDefault();
-    console.log("Form submission triggered"); // Add this line for debugging
+    console.log("Form submission triggered");
     set(ref(jdb, 'User/' + localStorage.getItem('userName')), {
         username: localStorage.getItem('userName'),
         title: document.getElementById('title').value,
